@@ -7,6 +7,8 @@
     #include <windows.h>
 #endif
 
+#define CAPACIDADE 20
+
 int main(){
     setlocale(LC_ALL, ".UTF8");
     #ifdef _WIN32
@@ -14,6 +16,14 @@ int main(){
     #endif
 
     int op;
+    int qnt_usada = 0, qnt_disponivel = 2;
+    Veiculo *veiculo = malloc(2 * sizeof(Veiculo));
+    int estacionamento[4][5] = {
+        {0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0}
+    };
 
     do{
         limpa_Titulo();
