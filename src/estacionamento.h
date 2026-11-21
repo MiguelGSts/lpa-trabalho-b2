@@ -15,4 +15,6 @@ void titulo();
 
 void limpa_Titulo();
 
+int menu();
+
 #endif

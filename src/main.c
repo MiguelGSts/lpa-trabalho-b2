@@ -27,6 +27,7 @@ int main(){
 
     do{
         limpa_Titulo();
+        op = menu();
 
     }while(op != 0);
 
