@@ -17,4 +17,12 @@ void limpa_Titulo();
 
 int menu();
 
+static void limpaBuffer();
+
+static int lerTexto(char *destino, int tamanho);
+
+static int lerInt();
+
+void continuar();
+
 #endif

@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "estacionamento.h"
+#include <string.h>
+#include <ctype.h>
 
 void limpaTela(){
     #ifdef _WIN32
@@ -44,4 +47,35 @@ int menu(){
     }
 
     return opcao;
+}
+
+static void limpaBuffer(){
+    int c;
+
+    while((c = getchar()) != '\n' && c != EOF);
+}
+
+static int lerTexto(char *destino, int tamanho){
+    if(fgets(destino, tamanho, stdin) == NULL) return 0;
+
+    if(strchr(destino, '\n') == NULL) limpaBuffer();
+    destino[strcspn(destino, "\n")] = '\0';
+    return 1;
+}
+
+static int lerInt(){
+    int valor;
+
+    while(scanf("%d", &valor) != 1){
+        limpaBuffer();
+        printf("[ERRO] Digite um número: ");
+    }
+    limpaBuffer();
+    
+    return valor;
+}
+
+void continuar(){
+    printf("Pressione Enter para continuar...");
+    getchar();
 }
