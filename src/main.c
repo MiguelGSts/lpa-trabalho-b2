@@ -17,7 +17,7 @@ int main(){
 
     int op;
     int qnt_usada = 0, qnt_disponivel = 2;
-    Veiculo *veiculo = malloc(2 * sizeof(Veiculo));
+    Veiculo *veiculos = malloc(qnt_disponivel * sizeof *veiculos);
     int estacionamento[4][5] = {
         {0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0},
@@ -29,7 +29,28 @@ int main(){
         limpa_Titulo();
         op = menu();
 
+        switch(op){
+            case 1:
+                limpa_Titulo();
+                limpaBuffer();
+                if(qnt_usada >= CAPACIDADE){
+                    puts("Limite de cadastro de veículos atingido.\n");
+                    break;
+                }
+                while(qnt_usada == qnt_disponivel){
+                    qnt_disponivel = redimensionaQnt(&veiculos, qnt_disponivel);
+                    if(qnt_usada == qnt_disponivel){
+                        break;
+                    }
+                }
+
+                qnt_usada = cadastrarVeiculo(veiculos, estacionamento, qnt_usada);
+                break;
+            
+        }
+
     }while(op != 0);
 
+    free(veiculos);
     return 0;
 }

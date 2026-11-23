@@ -17,12 +17,20 @@ void limpa_Titulo();
 
 int menu();
 
-static void limpaBuffer();
+void limpaBuffer();
 
-static int lerTexto(char *destino, int tamanho);
+int lerTexto(char *destino, int tamanho);
 
-static int lerInt();
+int lerInt();
 
 void continuar();
+
+int redimensionaQnt(Veiculo **veiculos, int qnt_disponivel);
+
+int placaExiste(Veiculo veiculos[], int qnt, const char *placa);
+
+int cadastrarVeiculo(Veiculo veiculos[], int estacionamento[][5], int qnt_usada);
+
+void cadastrarEstacionamento(Veiculo *novo, int estacionamento[][5]);
 
 #endif
