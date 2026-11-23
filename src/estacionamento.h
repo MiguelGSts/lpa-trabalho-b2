@@ -33,6 +33,16 @@ int cadastrarVeiculo(Veiculo veiculos[], int estacionamento[][5], int qnt_usada)
 
 void cadastrarEstacionamento(Veiculo *novo, int estacionamento[][5]);
 
+int comparaStrings(char *string1, char *string2);
+
 void consultarVeiculo(Veiculo veiculos[], int qnt_usada);
+
+int buscarPlaca(Veiculo veiculos[], int qnt_usada, Veiculo *buscado);
+
+void atualizarVeiculo(Veiculo veiculos[], int qnt_usada);
+
+void atualizarDescricao(Veiculo *atualizado);
+
+void atualizarCategoria(Veiculo *atualizado);
 
 #endif
