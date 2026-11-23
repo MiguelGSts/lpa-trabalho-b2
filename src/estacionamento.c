@@ -206,18 +206,34 @@ void cadastrarEstacionamento(Veiculo *novo, int estacionamento[][5]){
     }while(validador == -1);
 }
 
-void consultarVeiculo(Veiculo veiculos[], int qnt_usada){
-    Veiculo busca;
-    int i, indice = -1;
-
-    printf("==> Informe a placa do veículo buscado: ");
-    lerTexto(busca.id, sizeof(busca.id));
-    for(i = 0; busca.id[i] != '\0'; i++){
-        busca.id[i] = toupper((unsigned char)busca.id[i]);
+int comparaStrings(char *string1, char *string2){
+    
+    if(strcmp(string1, string2) == 0){
+        return 0;
     }
 
+    return 1;
+}
+
+void consultarVeiculo(Veiculo veiculos[], int qnt_usada){
+    Veiculo busca;
+    int i, indice = -1, ok;
+
+    do{
+        printf("==> Informe a placa do veículo: ");
+        ok = lerTexto(busca.id, sizeof(busca.id));
+        if(ok == 0){
+            clearerr(stdin);
+            puts("[ERRO] Falha na leitura da placa, tente novamente.");
+            continue;
+        }
+        for(i = 0; busca.id[i] != '\0'; i++){
+            busca.id[i] = toupper((unsigned char)busca.id[i]);
+        }
+    }while(ok == 0);
+
     for(i = 0; i < qnt_usada; i++){
-        if(strcmp(veiculos[i].id, busca.id) == 0){
+        if(comparaStrings(veiculos[i].id, busca.id) == 0){
             indice = i;
             break;
         }
@@ -234,4 +250,109 @@ void consultarVeiculo(Veiculo veiculos[], int qnt_usada){
         puts("O veículo buscado não foi encontrado.");
         continuar();
     }
+}
+
+int buscarPlaca(Veiculo veiculos[], int qnt_usada, Veiculo *buscado){
+    int ok, indice, i;
+    
+     do{
+        printf("==> Informe a placa do veículo: ");
+        ok = lerTexto(buscado->id, sizeof(buscado->id));
+        if(ok == 0){
+            clearerr(stdin);
+            puts("[ERRO] Falha na leitura da placa, tente novamente.");
+            continue;
+        }
+        for(i = 0; buscado->id[i] != '\0'; i++){
+            buscado->id[i] = toupper((unsigned char)buscado->id[i]);
+        }
+        for(i = 0; i < qnt_usada; i++){
+            if(comparaStrings(veiculos[i].id, buscado->id) == 0){
+                indice = i;
+                return indice;
+            }
+        }
+        if(indice == -1){
+            puts("O veículo não foi encontrado, tente novamente.");
+            ok = 0;
+            continuar();
+        }
+    }while(ok == 0);
+}
+
+void atualizarVeiculo(Veiculo veiculos[], int qnt_usada){
+    int op, indice;
+    Veiculo atualizado;
+
+    indice = buscarPlaca(veiculos, qnt_usada, &atualizado);
+   
+    do{
+        printf("==> Informe o que deseja atualizar\n");
+        printf("[1] Atualizar descrição do veículo\n");
+        printf("[2] Atualizar categoria do veículo\n");
+        printf("[0] Voltar ao menu\n");
+        printf("==> ");
+        op = lerInt();
+
+        switch(op){
+            case 1:
+                limpa_Titulo();
+                atualizarDescricao(&atualizado);
+                strcpy(veiculos[indice].descricao, atualizado.descricao);
+                break;
+            case 2:
+                limpa_Titulo();
+                atualizarCategoria(&atualizado);
+                veiculos[indice].categoria = atualizado.categoria;
+                break;
+            case 0:
+                limpa_Titulo();
+                printf("== Atualização encerrada ==\n");
+                printf("-> Placa: %s\n", veiculos[indice].id);
+                printf("-> Descrição %s\n", veiculos[indice].descricao);
+                printf("-> Categoria %d\n", veiculos[indice].categoria);
+                continuar();
+                break;
+            default:
+                puts("Opção inválida, tente novamente.");
+        }
+    }while(op != 0);
+}
+
+void atualizarDescricao(Veiculo *atualizado){
+    int ok;
+
+    do{
+        printf("==> Informe a nova descrição do veículo: ");
+        ok = lerTexto(atualizado->descricao, sizeof(atualizado->descricao));
+        if(ok == 0){
+            clearerr(stdin);
+            puts("[ERRO] Falha na leitura da placa, tente novamente.");
+            continuar();
+            continue;
+        }
+        if(atualizado->descricao[0] == '\0' || strlen(atualizado->descricao) == 0){
+            puts("[ERRO] Descrição vazia, tente novamente.");
+            ok = 0;
+            continuar();
+            continue;
+        }
+    }while(ok == 0);
+}
+
+void atualizarCategoria(Veiculo *atualizado){
+    int ok, num;
+
+    do{
+        printf("==> Informe a nova categoria do veículo: ");
+        num =  lerInt();
+        if(num < 1 || num > 2){
+            ok = 0;
+            puts("[ERRO] Categoria inválida, tente novamente.");
+            continuar();
+            continue;
+        }
+
+        atualizado->categoria = num;
+    }while(ok == 0);
 }
