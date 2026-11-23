@@ -400,3 +400,26 @@ void moverVeiculo(Veiculo veiculos[], int qnt_usada, int estacionamento[][5]){
         op = lerInt();
     }while(op != 0);
 }
+
+int removerVeiculo(Veiculo veiculos[], int qnt_usada, int estacionamento[][5]){
+    Veiculo veiculo;
+    int i;
+    int posicao = buscarPlaca(veiculos, qnt_usada, &veiculo);
+
+    if(posicao < 0 || posicao >= qnt_usada){
+        return qnt_usada;
+    }
+
+    if(posicao != -1){
+        estacionamento[veiculos[posicao].fileira][veiculos[posicao].coluna] = 0;
+
+        for(int i = posicao; i < qnt_usada - 1; i++){
+            veiculos[i] = veiculos[i + 1];
+        }
+
+        puts("Veículo removido com sucesso.");
+        continuar();
+
+        return qnt_usada - 1;
+    }
+}

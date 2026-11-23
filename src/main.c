@@ -64,6 +64,12 @@ int main(){
                 limpaBuffer();
                 moverVeiculo(veiculos, qnt_usada, estacionamento);
                 break;
+
+            case 5:
+                limpa_Titulo();
+                limpaBuffer();
+                qnt_usada = removerVeiculo(veiculos, qnt_usada, estacionamento);
+                break;
         }
 
     }while(op != 0);
