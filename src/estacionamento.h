@@ -45,4 +45,6 @@ void atualizarDescricao(Veiculo *atualizado);
 
 void atualizarCategoria(Veiculo *atualizado);
 
+void moverVeiculo(Veiculo veiculos[], int qnt_usada, int estacionamento[][5]);
+
 #endif

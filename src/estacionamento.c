@@ -356,3 +356,47 @@ void atualizarCategoria(Veiculo *atualizado){
         atualizado->categoria = num;
     }while(ok == 0);
 }
+
+void moverVeiculo(Veiculo veiculos[], int qnt_usada, int estacionamento[][5]){
+    int fileira, coluna, indice;
+    int op;
+    Veiculo veiculo;
+
+    do{
+        indice = buscarPlaca(veiculos, qnt_usada, &veiculo);
+        do{
+            printf("=> Informe a fileira para a mudança (1 à 4): ");
+            fileira = lerInt();
+            if(fileira > 4 || fileira < 1){
+                puts("Fileira inválida, tente novamente.");
+                continuar();
+            }
+        }while(fileira > 4 || fileira < 1);
+        do{
+            printf("=> Informe a coluna para a mudança (1 à 5): ");
+            coluna = lerInt();
+            if(coluna > 5 || coluna < 1){
+                puts("Coluna inválida, tente novamente.");
+                continuar();
+            }
+        }while(coluna > 5 || coluna < 1);
+
+        if(estacionamento[fileira - 1][coluna - 1] == 0){
+            estacionamento[fileira - 1][coluna - 1] = 1;
+            estacionamento[veiculos[indice].fileira][veiculos[indice].coluna] = 0;
+            veiculos[indice].fileira = fileira - 1;
+            veiculos[indice].coluna = coluna - 1;
+        }else if(veiculos[indice].fileira == fileira && veiculos[indice].coluna == coluna){
+            limpa_Titulo();
+            puts("A vaga já está ocupada pelo veículo escolhido.");
+            continuar();
+        }else{
+            limpa_Titulo();
+            puts("A vaga escolhida está ocupada por outro veículo.");
+            continuar();
+        }
+        printf("Deseja fazer outra mudança?\n");
+        printf("[1] para Sim\n[0] para Não\n=> ");
+        op = lerInt();
+    }while(op != 0);
+}
