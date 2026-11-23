@@ -205,3 +205,33 @@ void cadastrarEstacionamento(Veiculo *novo, int estacionamento[][5]){
         }
     }while(validador == -1);
 }
+
+void consultarVeiculo(Veiculo veiculos[], int qnt_usada){
+    Veiculo busca;
+    int i, indice = -1;
+
+    printf("==> Informe a placa do veículo buscado: ");
+    lerTexto(busca.id, sizeof(busca.id));
+    for(i = 0; busca.id[i] != '\0'; i++){
+        busca.id[i] = toupper((unsigned char)busca.id[i]);
+    }
+
+    for(i = 0; i < qnt_usada; i++){
+        if(strcmp(veiculos[i].id, busca.id) == 0){
+            indice = i;
+            break;
+        }
+    }
+
+    if(indice != -1){
+        printf("== Veículo encontrado ==\n");
+        printf("-> Placa: %s\n", veiculos[indice].id);
+        printf("-> Descrição: %s\n", veiculos[indice].descricao);
+        printf("-> Categoria: %d\n", veiculos[indice].categoria);
+        printf("-> Fileira: %d | Coluna: %d\n", veiculos[indice].fileira + 1, veiculos[indice].coluna + 1);
+        continuar();
+    }else{
+        puts("O veículo buscado não foi encontrado.");
+        continuar();
+    }
+}

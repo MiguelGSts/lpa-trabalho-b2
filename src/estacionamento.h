@@ -33,4 +33,6 @@ int cadastrarVeiculo(Veiculo veiculos[], int estacionamento[][5], int qnt_usada)
 
 void cadastrarEstacionamento(Veiculo *novo, int estacionamento[][5]);
 
+void consultarVeiculo(Veiculo veiculos[], int qnt_usada);
+
 #endif
