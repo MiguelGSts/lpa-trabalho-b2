@@ -46,7 +46,12 @@ int main(){
 
                 qnt_usada = cadastrarVeiculo(veiculos, estacionamento, qnt_usada);
                 break;
-            
+
+            case 2:
+                limpa_Titulo();
+                limpaBuffer();
+                consultarVeiculo(veiculos, qnt_usada);
+                break;
         }
 
     }while(op != 0);
