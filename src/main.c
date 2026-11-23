@@ -70,6 +70,15 @@ int main(){
                 limpaBuffer();
                 qnt_usada = removerVeiculo(veiculos, qnt_usada, estacionamento);
                 break;
+
+            case 6:
+                limpa_Titulo();
+                limpaBuffer();
+                if(qnt_usada == 0){
+                    printf("Não há veículos cadastrados no momento, tente novamente mais tarde.\n");
+                    break;
+                }
+                listarVeiculos(veiculos, qnt_usada);
         }
 
     }while(op != 0);

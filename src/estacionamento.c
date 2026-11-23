@@ -423,3 +423,15 @@ int removerVeiculo(Veiculo veiculos[], int qnt_usada, int estacionamento[][5]){
         return qnt_usada - 1;
     }
 }
+
+void listarVeiculos(Veiculo veiculos[], int qnt_usada){
+    int i;
+
+    for(i = 0; i < qnt_usada; i++){
+        printf("\n=== Veiculo %d ===\n", (i+1));
+        printf("=> Placa: %s\n", veiculos[i].id);
+        printf("=> Descrição: %s\n", veiculos[i].descricao);
+        printf("=> Categoria: %d\n", veiculos[i].categoria);
+        printf("=> Vaga: Fileira %d | Coluna %d\n", veiculos[i].fileira + 1, veiculos[i].coluna + 1);
+    }
+}

@@ -49,4 +49,6 @@ void moverVeiculo(Veiculo veiculos[], int qnt_usada, int estacionamento[][5]);
 
 int removerVeiculo(Veiculo veiculos[], int qnt_usada, int estacionamento[][5]);
 
+void listarVeiculos(Veiculo veiculos[], int qnt_usada);
+
 #endif
