@@ -450,3 +450,25 @@ void mostrarEstacionamento(int estacionamento[][5]){
     printf("\n==> Livre: 0 | Ocupada: 1\n");
     continuar();
 }
+
+void exibirRelatorio(Veiculo veiculos[], int qnt_usada){
+    int i, carros, motos;
+
+    for(i = 0; i < qnt_usada; i++){
+        if(veiculos[i].categoria == 1){
+            carros++;
+        }else{
+            motos++;
+        }
+    }
+
+    printf("=== Relatório de Ocupação ===\n");
+
+    printf("=> Total de vagas: 20\n");
+    printf("=> Vagas ocupadas: %d\n", qnt_usada);
+    printf("=> Vagas livres: %d\n", (20 - qnt_usada));
+    printf("=> Percentual de ocupação: %.2f%%", (((float)qnt_usada/20) * 100));
+    printf("=> Quantidade de carros: %d\n", carros);
+    printf("=> Quantidade de motos: %d\n", motos);
+    continuar();
+}

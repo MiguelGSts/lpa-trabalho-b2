@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <locale.h>
 #include "estacionamento.h"
 
@@ -79,6 +78,7 @@ int main(){
                     break;
                 }
                 listarVeiculos(veiculos, qnt_usada);
+                continuar();
                 break;
             
             case 7:
@@ -90,6 +90,11 @@ int main(){
             case 8:
                 limpa_Titulo();
                 limpaBuffer();
+                exibirRelatorio(veiculos, qnt_usada);
+                break;
+            
+            default:
+                break;
         }
 
     }while(op != 0);

@@ -53,4 +53,6 @@ void listarVeiculos(Veiculo veiculos[], int qnt_usada);
 
 void mostrarEstacionamento(int estacionamento[][5]);
 
+void exibirRelatorio(Veiculo veiculos[], int qnt_usada);
+
 #endif
