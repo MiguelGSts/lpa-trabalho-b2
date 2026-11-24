@@ -87,7 +87,7 @@ int redimensionaQnt(Veiculo **veiculos, int qnt_disponivel){
         qnt_nova = CAPACIDADE;
     }
 
-    Veiculo *temp = realloc(*veiculos, qnt_nova * sizeof *veiculos);
+    Veiculo *temp = realloc(*veiculos, qnt_nova * sizeof **veiculos);
     if(temp == NULL){
         fprintf(stderr, "Falha no redimensionamento do vetor.\n");
         continuar();
@@ -110,12 +110,13 @@ int placaExiste(Veiculo veiculos[], int qnt, const char *placa){
 
 int cadastrarVeiculo(Veiculo veiculos[], int estacionamento[][5], int qnt_usada){
     int i;
+    char buffer[64];
     Veiculo novo;
 
     int ok;
     do{
         printf("==> Informe a placa do veículo: ");
-        ok = lerTexto(novo.id, sizeof(novo.id));
+        ok = lerTexto(buffer, sizeof(buffer));
 
         if(ok == 0){
             clearerr(stdin);
@@ -123,19 +124,23 @@ int cadastrarVeiculo(Veiculo veiculos[], int estacionamento[][5], int qnt_usada)
             continue;
         }
 
-        for(i = 0; novo.id[i] != '\0'; i++){
-            novo.id[i] = toupper((unsigned char)novo.id[i]);
+        for(i = 0; buffer[i] != '\0'; i++){
+            buffer[i] = toupper((unsigned char)buffer[i]);
         }
 
-        if(strlen(novo.id) == 0){
+        if(strlen(buffer) == 0){
             puts("[ERRO] Placa ausente, tente novamente.");
             ok = 0;
-        }else if(placaExiste(veiculos, qnt_usada, novo.id) == 1){
+        }else if(strlen(buffer) != 7){
+            puts("A placa deve ter exatamente 7 caracteres, tente novamente.");
+            ok = 0;
+        }else if(placaExiste(veiculos, qnt_usada, buffer) == 1){
             puts("[ERRO] Placa já cadastrada, tente novamente.");
             ok = 0;
         }
 
     }while(ok == 0);
+    strcpy(novo.id, buffer);
 
     printf("==> Informe a descrição do veículo: ");
     lerTexto(novo.descricao, sizeof(novo.descricao));
@@ -452,12 +457,12 @@ void mostrarEstacionamento(int estacionamento[][5]){
 }
 
 void exibirRelatorio(Veiculo veiculos[], int qnt_usada){
-    int i, carros, motos;
+    int i, carros = 0, motos = 0;
 
     for(i = 0; i < qnt_usada; i++){
         if(veiculos[i].categoria == 1){
             carros++;
-        }else{
+        }else if(veiculos[i].categoria == 2){
             motos++;
         }
     }
@@ -467,7 +472,7 @@ void exibirRelatorio(Veiculo veiculos[], int qnt_usada){
     printf("=> Total de vagas: 20\n");
     printf("=> Vagas ocupadas: %d\n", qnt_usada);
     printf("=> Vagas livres: %d\n", (20 - qnt_usada));
-    printf("=> Percentual de ocupação: %.2f%%", (((float)qnt_usada/20) * 100));
+    printf("=> Percentual de ocupação: %.2f%%\n", (((float)qnt_usada/20) * 100));
     printf("=> Quantidade de carros: %d\n", carros);
     printf("=> Quantidade de motos: %d\n", motos);
     continuar();

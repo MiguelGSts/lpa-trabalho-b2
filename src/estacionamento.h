@@ -2,7 +2,7 @@
 #define ESTACIONAMENTO_H
 
 typedef struct{
-    char id[7];
+    char id[8];
     char descricao[60];
     int categoria;
     int fileira;

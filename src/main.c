@@ -34,9 +34,10 @@ int main(){
                 limpaBuffer();
                 if(qnt_usada >= CAPACIDADE){
                     puts("Limite de cadastro de veículos atingido.\n");
+                    continuar();
                     break;
                 }
-                while(qnt_usada == qnt_disponivel){
+                if(qnt_usada == qnt_disponivel){
                     qnt_disponivel = redimensionaQnt(&veiculos, qnt_disponivel);
                     if(qnt_usada == qnt_disponivel){
                         break;
