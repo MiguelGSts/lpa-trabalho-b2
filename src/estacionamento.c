@@ -435,3 +435,18 @@ void listarVeiculos(Veiculo veiculos[], int qnt_usada){
         printf("=> Vaga: Fileira %d | Coluna %d\n", veiculos[i].fileira + 1, veiculos[i].coluna + 1);
     }
 }
+
+void mostrarEstacionamento(int estacionamento[][5]){
+    int fileira, coluna;
+
+    printf("\tC1\tC2\tC3\tC4\tC5\n");
+    for(fileira = 0; fileira < 4; fileira++){
+        printf("F%d\t", fileira + 1);
+        for(coluna = 0; coluna < 5; coluna++){
+            printf("[%d]\t",estacionamento[fileira][coluna]);
+        }
+        printf("\n");
+    }
+    printf("\n==> Livre: 0 | Ocupada: 1\n");
+    continuar();
+}

@@ -79,6 +79,17 @@ int main(){
                     break;
                 }
                 listarVeiculos(veiculos, qnt_usada);
+                break;
+            
+            case 7:
+                limpa_Titulo();
+                limpaBuffer();
+                mostrarEstacionamento(estacionamento);
+                break;
+
+            case 8:
+                limpa_Titulo();
+                limpaBuffer();
         }
 
     }while(op != 0);
